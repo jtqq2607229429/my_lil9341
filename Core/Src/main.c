@@ -26,7 +26,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-#include "stdio.h"
+
 #include "ILI93xx.h"
 #include "touch.h"
 /* USER CODE END Includes */
