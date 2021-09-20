@@ -66,9 +66,9 @@ static void lv_ex_label_1(void)
     lv_obj_t * label2 = lv_label_create(lv_scr_act(), NULL);
     lv_label_set_recolor(label2, true);
     lv_label_set_long_mode(label2, LV_LABEL_LONG_SROLL_CIRC); /*Circular scroll*/
-    lv_obj_set_width(label2, 120);
+    lv_obj_set_width(label2, 240);
     // Hello world ! Trisuborn.
-    lv_label_set_text(label2, "#ff0000 Hello# #00ff00 world ! Trisuborn.#");
+    lv_label_set_text(label2, "#ff0000 Hello# #00ff00 world ! Trisuborn.你还送撒撒#");
     lv_obj_align(label2, NULL, LV_ALIGN_CENTER, 0, 0);
 }
 /* USER CODE BEGIN PFP */
