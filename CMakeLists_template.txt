@@ -47,13 +47,21 @@ endif ()
 
 include_directories(${includes})
 include_directories(${includes} Hardwares/LCD Hardwares/touch)
+include_directories(${includes} Middlewares/lvgl/src/lv_core)
+include_directories(${includes} Middlewares/lvgl/src/lv_draw)
+include_directories(${includes} Middlewares/lvgl/src/lv_font)
+include_directories(${includes} Middlewares/lvgl/src/lv_hal)
+include_directories(${includes} Middlewares/lvgl/src/lv_misc)
+include_directories(${includes} Middlewares/lvgl/src/lv_themes)
+include_directories(${includes} Middlewares/lvgl/src/lv_widgets)
+
+include_directories(${includes} Middlewares/lvgl_drive)
+include_directories(${includes} Middlewares)
 
 add_definitions(${defines})
 
 file(GLOB_RECURSE SOURCES ${sources})
-file(GLOB_RECURSE SOURCES ${sources} "Hardwares/*.*")
-
-file(GLOB_RECURSE SOURCES ${sources} "Middlewares/*.*")
+file(GLOB_RECURSE SOURCES ${sources} "Hardwares/*.*" "Middlewares/*.*")
 
 set(LINKER_SCRIPT $${CMAKE_SOURCE_DIR}/${linkerScript})
 

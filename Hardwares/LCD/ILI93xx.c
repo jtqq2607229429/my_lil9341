@@ -1844,6 +1844,18 @@ void LCD_DrawRectangle(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2)
 //在指定位置画一个指定大小的圆
 //(x,y):中心点
 //r    :半径
+
+void LCD_ShowImage(uint16_t x_start, uint16_t y_start, uint16_t x_end, uint16_t y_end, const uint16_t *color) {
+    uint16_t height, width;
+    uint16_t i, j;
+    width = x_end - x_start + 1;
+    height = y_end - y_start + 1;
+    for (i = 0; i < height; i++) {
+        LCD_SetCursor(x_start, y_start + i);
+        LCD_WriteRAM_Prepare();
+        for (j = 0; j < width; j++)TFT_LCD->LCD_RAM = color[i * width + j];
+    }
+}
 void LCD_Draw_Circle(uint16_t x0,uint16_t y0,uint8_t r)
 {
 	int a,b;

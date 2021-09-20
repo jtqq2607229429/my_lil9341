@@ -1,9 +1,7 @@
 #ifndef __LCD_H
 #define __LCD_H		
 #include "main.h"	 
-#include "stdlib.h" 
-	 
-
+#include "stdlib.h"
 extern SRAM_HandleTypeDef TFTSRAM_Handler;    //SRAM句柄(用于控制LCD)
 
 //LCD重要参数集
@@ -36,6 +34,7 @@ typedef struct
 //使用NOR/SRAM的 Bank1.sector4,地址位HADDR[27,26]=11 A6作为数据命令区分线 
 //注意设置时STM32内部会右移一位对其! 111 1110=0X7E			    
 #define LCD_BASE        ((uint32_t)(0x6C000000 | 0x0000007E))
+
 #define TFT_LCD             ((LCD_TypeDef *) LCD_BASE)
 //////////////////////////////////////////////////////////////////////////////////
 	 
@@ -106,10 +105,11 @@ void LCD_WriteRAM(uint16_t RGB_Code);
 void LCD_SSD_BackLightSet(uint8_t pwm);							//SSD1963 背光控制
 void LCD_Scan_Dir(uint8_t dir);									//设置屏扫描方向
 void LCD_Display_Dir(uint8_t dir);								//设置屏幕显示方向
-void LCD_Set_Window(uint16_t sx,uint16_t sy,uint16_t width,uint16_t height);	//设置窗口					   						   																			 
+void LCD_Set_Window(uint16_t sx,uint16_t sy,uint16_t width,uint16_t height);	//设置窗口
+void LCD_ShowImage(uint16_t x_start, uint16_t y_start, uint16_t x_end, uint16_t y_end, const uint16_t *color);
 //LCD分辨率设置
-#define SSD_HOR_RESOLUTION		800		//LCD水平分辨率
-#define SSD_VER_RESOLUTION		480		//LCD垂直分辨率
+#define SSD_HOR_RESOLUTION		240		//LCD水平分辨率
+#define SSD_VER_RESOLUTION		320		//LCD垂直分辨率
 //LCD驱动参数设置
 #define SSD_HOR_PULSE_WIDTH		1		//水平脉宽
 #define SSD_HOR_BACK_PORCH		46		//水平前廊

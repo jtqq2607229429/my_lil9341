@@ -26,9 +26,13 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
 #include "ILI93xx.h"
 #include "touch.h"
+//#include "lvgl.h"
+#include "lv_port_disp.h"
+#include "lv_port_indev.h"
+//#include <gui_guider.h>
+//#include <events_init.h>
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -57,6 +61,16 @@ int __io_putchar(int ch) {
 
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
+static void lv_ex_label_1(void)
+{
+    lv_obj_t * label2 = lv_label_create(lv_scr_act(), NULL);
+    lv_label_set_recolor(label2, true);
+    lv_label_set_long_mode(label2, LV_LABEL_LONG_SROLL_CIRC); /*Circular scroll*/
+    lv_obj_set_width(label2, 120);
+    // Hello world ! Trisuborn.
+    lv_label_set_text(label2, "#ff0000 Hello# #00ff00 world ! Trisuborn.#");
+    lv_obj_align(label2, NULL, LV_ALIGN_CENTER, 0, 0);
+}
 /* USER CODE BEGIN PFP */
 
 /* USER CODE END PFP */
@@ -100,12 +114,20 @@ int main(void) {
     MX_USART1_UART_Init();
     MX_I2C1_Init();
     /* USER CODE BEGIN 2 */
+
     TFTLCD_Init();
-//    LCD_Clear(GREEN);
-    TP_Init();
+    lv_init();
+    lv_port_disp_init();        // 显示器初始化
+//    lv_port_indev_init();       // 输入设备初始化（如果没有实现就注释掉）
+//    lv_port_fs_init();          // 文件系统设备初始化（如果没有实现就注释掉）
+
+
+////    LCD_Clear(GREEN);
+//    TP_Init();
    // LCD_ShowImage(10,10,130,130,touxiang_map);
     uint16_t x;
     uint16_t y;
+    lv_ex_label_1();
     /* USER CODE END 2 */
 
     /* Infinite loop */
@@ -113,13 +135,16 @@ int main(void) {
     while (1) {
         /* USER CODE END WHILE */
         /* USER CODE BEGIN 3 */
-        x = pos.x;
-        y = pos.y;
-        TP_Scan(0);
-        if ((x != pos.x) || (y != pos.y)) {
-            POINT_COLOR = RED;
-            LCD_DrawPoint(x, y);
-        }
+//        x = pos.x;
+//        y = pos.y;
+//        TP_Scan(0);
+//        if ((x != pos.x) || (y != pos.y)) {
+//            POINT_COLOR = RED;
+//            LCD_DrawPoint(x, y);
+//        }
+        lv_tick_inc(5);
+        lv_task_handler();
+        HAL_Delay(5);	// 可以省略，lvgl并不是OS的真正任务
     }
     /* USER CODE END 3 */
 }
